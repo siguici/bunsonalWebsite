@@ -3,20 +3,20 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "astro": "bunx --bun astro",
-    "sync": "bunx --bun astro sync",
-    "build": "bun run fix && bunx --bun astro build",
-    "check": "biome ci . && bunx --bun astro check",
+    "astro": "astro",
+    "sync": "astro sync",
+    "build": "bun run fix && bun astro build",
+    "check": "biome ci . && bun astro check",
     "check.format": "biome format .",
     "check.lint": "biome check .",
-    "dev": "bunx --bun astro dev",
+    "dev": "bun astro dev",
     "fix": "bun run lint && bun run format",
     "format": "biome format --write .",
     "lint": "biome check --apply-unsafe .",
     "preview": "bun run build && bun run serve",
-    "prod": "bun run check && bunx --bun astro build",
+    "prod": "bun run check && bun astro build",
     "serve": "node ./dist/server/entry.mjs",
-    "start": "bunx --bun astro dev --open"
+    "start": "bun astro dev --open"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.3",
