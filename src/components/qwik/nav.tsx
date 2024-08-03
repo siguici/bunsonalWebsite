@@ -5,9 +5,9 @@ import {
   useSignal,
   useStyles$,
 } from '@builder.io/qwik'
-import { NavButton } from './navButton'
 import { isServer } from '@builder.io/qwik/build'
 import styles from './nav.css?inline'
+import { NavButton } from './navButton'
 
 interface NavProps {
   entries: {

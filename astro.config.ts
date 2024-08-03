@@ -1,10 +1,10 @@
-import qwik from '@qwikdev/astro'
-import { defineConfig } from 'astro/config'
+import sitemap from '@astrojs/sitemap'
 // import node from "@astrojs/node";
 import tailwind from '@astrojs/tailwind'
+import qwik from '@qwikdev/astro'
 import compressor from 'astro-compressor'
-import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
+import { defineConfig } from 'astro/config'
 
 import mdx from '@astrojs/mdx'
 
@@ -35,8 +35,7 @@ export default defineConfig({
         'astro:build:setup': ({ vite, target }) => {
           if (target === 'client') {
             if (vite.build?.rollupOptions) {
-              vite.build.rollupOptions.external = [
-              ]
+              vite.build.rollupOptions.external = []
             }
           }
         },
