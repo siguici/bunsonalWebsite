@@ -1,0 +1,43 @@
+---
+title: "Starting Out With EndeavourOS and NeoVim"
+pubDate: 2024-07-30 09:00:00
+description: "Reimagining My Development Setup"
+tags: ["Arch", "EndeavourOS", "Neovim"]
+image: "https://raw.githubusercontent.com/nduartech/nduartech.github.io/master/packages/host/src/assets/ninjavim.jpeg"
+---
+
+import { Image } from "astro:assets";
+import ninjavim from "../../assets/ninjavim.jpeg";
+import screen from "../../assets/screenshot.png";
+
+<Image
+  src={ninjavim}
+  alt="NinjaVim"
+  class="w-1/4 h-1/4 mt-7 mb-7 rounded-l-3xl float-end ml-7"
+></Image>
+
+<div class="reset-tw">
+    I've always preferred Unix over Windows, but in recent years, Windows 10 and then 11 have been my primary operating systems, with all my coding done in WSL. However, Microsoft’s recent announcement of Recall has prompted me to reconsider this setup.
+
+    Recall signifies a significant shift in Windows OS design, and I personally view it as a step in the wrong direction. It suggests a future where AI features are intrusive, constantly monitoring, and potentially compromising security, rather than remaining unobtrusive and helpful.
+
+    Given my preference for Unix, I’m seizing this opportunity to revert to a dual-boot system. This isn’t the first time I’ve made such a change. In fact, I’ve done so on several occasions with less justification.
+
+    In my late middle school years, my parents gave me a Samsung Chromebook, my first "laptop." Although limited in capability, I soon sought ways to maximize its potential (mainly I just wanted to play Minecraft). Which of course led me to Linux, and more specifically Ubuntu. Within a month, I had set up a dual-boot configuration between ChromeOS and Ubuntu. However, Ubuntu's performance on the Chromebook was subpar, often lagging or freezing entirely.
+
+    This experience drove me to try Arch Linux. I removed the Ubuntu partitions and, embracing the Arch philosophy, built my OS from the ground up. This process was immensely rewarding, but after moving on from the Chromebook, I did hesitate to revisit Arch due to the daunting thought of repeating the installation process.
+    
+    Fast-forward a decade and a half later, years spent oscillating between using Windows and Ubuntu (sometimes in dual-boot, sometimes using only one, until WSL came along and I abandoned Ubuntu for Windows for what I thought was the last time), and now once again I was looking to make a change.
+
+    As always, I began by installing Ubuntu in a new partition/dual-boot setup. Unfortunately, after a month, I found the latest LTS release still plagued by bugs (Wayland and Nvidia graphics cards are apparently water and oil). Disheartened by these issues, I began exploring alternatives. 
+
+    I considered trying Debian or Fedora, but felt Debian likely be similar in experience to Ubuntu and never having used Fedora as a daily driver made it less appealing. And then I remembered my positive experience with Arch, and also how intimidating the setup was. One Google search later, and I happily stumbled upon EndeavourOS, all the goodness of Arch without the headache of getting up and running. Wonderful.
+
+    From there, I still had a few more choices to make. For my desktop environment, I opted for a window manager rather than a full DE, choosing i3 during the EndeavourOS install process, as I wanted my new development system to be as efficient and bloat-free as possible. I decided to stick with Xorg and plan on avoiding Wayland till it gets better with Nvidia GPUs. Yet, despite choosing the much older desktop server, I was still able to achieve what I felt was an aesthetically pleasing while cogent UI. Using picom as my compositor I first changed all windows to have rounded corners; with i3 there are no close or minimize buttons, which in turn makes rounded corners look pretty nice. I also allowed applications to set their own transparency, while adding a blur effect (really only affects the terminal).
+
+    Important to note, as I was getting my system up and running, I also decided to commit to something I always wanted to try, but put off for a long time—using Neovim. Inspired mainly by a Primeagen video where he showed off his Neovim workflows, as well as the Neovim series on the Typecraft YouTube channel, I decided to dive into using Neovim regularly, and found myself in a whole new world. My current setup includes 66 plugins (many lazy-loaded), which in turn enable many features you'd find in an IDE or VSCode. It was during this first exploration of Neovim that I picked the theme I use currently: Tokyo Night Storm. Inspired by my Neovim theme, I decided to try to make every part of my OS also use the same colors, setting the same color scheme for i3 and all windows, Thunar (file GUI explorer), browser, Alacritty (my terminal emulator of choice currently), Zellij, and even the TUI spotify library I use, which results in a pleasant, consistent experience.
+
+    I didn't stop there, of course. I set up the ly display manager so my login screen is a TUI (just looks kinda cool I think), used Starship to create an emoji-based shell prompt, setup ble.sh for bash autocompletion, and aider for a terminal chat interface connecting to Groq. The end result is a capable system that meets my specific needs and aesthetic tastes. While it is still technically a dual-boot, I shrunk my Windows partition to the bare minimum, and haven't really booted back into Windows since. I don't see why I would really ever go back.
+
+</div>
+<Image src={screen} alt="Screenshot" class="w-full float-center"></Image>

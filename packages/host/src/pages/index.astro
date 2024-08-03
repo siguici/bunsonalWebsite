@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Landing from '../components/svelte/Landing.svelte'
+import { Image } from 'astro:assets'
+import '../../public/landing.svg'
+import '../../public/landing-light.svg'
+import me from '../assets/me.png'
+const bounceInDownAnim = {
+  new: {
+    name: 'bounceInDown',
+    duration: '0.7s',
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fillMode: 'forwards',
+  },
+  old: {
+    name: 'bounceOutDown',
+    duration: '0.7s',
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fillMode: 'forwards',
+  },
+}
+
+const bidAnim = {
+  forwards: bounceInDownAnim,
+  backwards: bounceInDownAnim,
+}
+---
+<script>
+    import { navigate } from "astro:transitions/client";
+    import { prefetch } from 'astro:prefetch';
+    window.addEventListener('navigate',(event)=> {
+        prefetch(event.detail);
+        setTimeout(navigate(event.detail),300);
+    });
+</script>
+<Layout title="Hi, I'm Nathan">
+	<main id="app" transition:animate={bidAnim}>
+        <Landing client:only="svelte">
+            <Image class="rounded-full object-fill mb-10" src={me} alt="Nathan Duarte" slot="me"/>
+        </Landing>
+	</main>
+</Layout>
+
+<style is:global>
+
+</style>

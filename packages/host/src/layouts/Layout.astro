@@ -1,0 +1,78 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+import { Theme } from '../components/qwik/theme'
+import '../styles/global.css'
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Hi, I'm Nathan"/>
+    <script type="importmap">
+        {
+            "imports":{
+                "interests":"https://nduartech.tiiny.site/dist/bundle2.js",
+                "software-eng":"https://nduartech.tiiny.site/dist/bundle.js",
+                "solid-js":"https://esm.sh/solid-js@1.8.17"
+            }
+        }
+    </script>
+    <ViewTransitions/>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline data-astro-rerun>
+
+        (function () {
+            function getTheme() {
+                if (typeof window.localStorage && window.localStorage.getItem("theme")) {
+                    return window.localStorage.getItem("theme");
+                } else if (document.documentElement.dataset.theme) {
+                    return document.documentElement.dataset.theme;
+                }
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    return "dark";
+                }
+                return "light";
+            }
+
+            function setTheme(theme) {
+                document.documentElement.className = theme;
+                localStorage.setItem('theme', theme);
+            }
+
+            var theme = getTheme();
+            if (theme) {
+                setTheme(theme);
+            } else {
+                setTheme('light');
+            }
+        })();
+        window.addEventListener('load', function () {
+                let sun = document.getElementById('dayNightSun');
+                let moon = document.getElementById('dayNightMoon');
+                if (localStorage.getItem('theme') === 'dark') {
+                    sun.classList.add('active');
+                    moon.classList.add('hidden');
+                } else {
+                    moon.classList.add('active');
+                    sun.classList.add('hidden');
+                }
+            }
+        );
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="generator" content={Astro.generator}/>
+    <title>{title}</title>
+</head>
+<body class="bg-regal-blue-400 dark:bg-regal-blue-950">
+<Theme></Theme>
+<slot/>
+</body>
+</html>

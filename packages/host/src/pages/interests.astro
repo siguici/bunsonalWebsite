@@ -1,0 +1,57 @@
+---
+import SubLayout from '../layouts/SubLayout.astro'
+import Interest from '../components/solid/Interest'
+import '../styles/interest.css'
+const zoomInAnim = {
+  new: {
+    name: 'zoomIn',
+    duration: '0.7s',
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fillMode: 'forwards',
+  },
+  old: {
+    name: 'zoomOut',
+    duration: '0.7s',
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fillMode: 'forwards',
+  },
+}
+
+const ziAnim = {
+  forwards: zoomInAnim,
+  backwards: zoomInAnim,
+}
+---
+<script>
+    import { navigate } from "astro:transitions/client";
+    import { prefetch } from 'astro:prefetch';
+    window.addEventListener('navigate',(event)=> {
+        prefetch(event.detail);
+        setTimeout(navigate(event.detail),300);
+    });
+    // document.addEventListener('astro:page-load',()=>{
+    //     window.requestAnimationFrame(()=> {
+    //         let docElem = document.getElementById("bgInt");
+    //         if(docElem) {
+    //             docElem.classList.add('animated','zoomIn')
+    //         }
+    //     })});
+</script>
+<SubLayout title="I'm Passionate About..." navProps={[
+    {
+        icon: '<svg class="nav w-7 h-7" stroke-width="0.8" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ddf2ff" viewBox="2.55 3.23 18.9 18.22"><path d="M9 21H7C4.79086 21 3 19.2091 3 17V10.7076C3 9.30887 3.73061 8.01175 4.92679 7.28679L9.92679 4.25649C11.2011 3.48421 12.7989 3.48421 14.0732 4.25649L19.0732 7.28679C20.2694 8.01175 21 9.30887 21 10.7076V17C21 19.2091 19.2091 21 17 21H15M9 21V17C9 15.3431 10.3431 14 12 14V14C13.6569 14 15 15.3431 15 17V21M9 21H15" stroke="#ddf2ff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-5"></path></svg>',
+        label: "Home",
+        path: "/"
+    }, {
+        icon: '<svg viewBox="0 0 24 24" class="nav w-7 h-7" stroke-width="0.9" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff"><path d="M6.81815 22L6.81819 19.143C6.66235 17.592 5.63284 16.4165 4.68213 15M14.4545 22L14.4545 20.2858C19.3636 20.2858 18.8182 14.5717 18.8182 14.5717C18.8182 14.5717 21 14.5717 21 12.286L18.8182 8.8576C18.8182 4.28632 15.1094 2.04169 11.1818 2.00068C8.98139 1.97771 7.22477 2.53124 5.91201 3.5" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-10"></path><path d="M13 7L15 9.5L13 12" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-20"></path><path d="M5 7L3 9.5L5 12" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-30"></path><path d="M10 6L8 13" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-40"></path></svg>',
+        label: "Work",
+        path: "/software-engineer"
+    },{
+        icon: '<svg class="nav w-7 h-7" viewBox="0 0 24 24" stroke-width="1" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff"><path d="M2.90602 17.505L5.33709 3.71766C5.5289 2.62987 6.56621 1.90354 7.654 2.09534L19.4717 4.17912C20.5595 4.37093 21.2858 5.40824 21.094 6.49603L18.6629 20.2833C18.4711 21.3711 17.4338 22.0975 16.346 21.9057L4.52834 19.8219C3.44055 19.6301 2.71421 18.5928 2.90602 17.505Z" stroke="#ffffff" stroke-width="1" class="svg-elem-13"></path><path d="M8.92902 6.38184L16.8075 7.77102" stroke="#ffffff" stroke-width="1" stroke-linecap="round" class="svg-elem-23"></path><path d="M8.23444 10.3213L16.1129 11.7105" stroke="#ffffff" stroke-width="1" stroke-linecap="round" class="svg-elem-33"></path><path d="M7.53986 14.2607L12.4639 15.129" stroke="#ffffff" stroke-width="1" stroke-linecap="round" class="svg-elem-43"></path></svg>',
+        label:'Blog',
+        path: '/blog'
+    }
+]}> <div transition:animate={ziAnim}>
+    <Interest client:only="solid-js" />
+    </div>
+</SubLayout>

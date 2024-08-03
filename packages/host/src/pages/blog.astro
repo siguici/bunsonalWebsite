@@ -1,0 +1,54 @@
+---
+import BlogLayout from '../layouts/BlogLayout.astro'
+import { getCollection } from 'astro:content'
+import BlogSubLayout from '../layouts/BlogSubLayout.astro'
+const blogEntries = await getCollection('blog')
+---
+<script>
+    import {navigate} from "astro:transitions/client";
+    import {prefetch} from 'astro:prefetch';
+
+    window.addEventListener('navigate', (event) => {
+        prefetch(event.detail);
+        setTimeout(navigate(event.detail), 300);
+    });
+    // document.addEventListener('astro:page-load',()=>{
+    //     window.requestAnimationFrame(()=> {
+    //         let docElem = document.getElementById("bgBlog");
+    //         if(docElem) {
+    //             docElem.classList.add('animated','fadeIn')
+    //         }
+    //     })});
+</script>
+<BlogLayout title="Technical Blog" navProps={[
+    {
+        icon: '<svg class="nav w-7 h-7" stroke-width="0.8" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ddf2ff" viewBox="2.55 3.23 18.9 18.22"><path d="M9 21H7C4.79086 21 3 19.2091 3 17V10.7076C3 9.30887 3.73061 8.01175 4.92679 7.28679L9.92679 4.25649C11.2011 3.48421 12.7989 3.48421 14.0732 4.25649L19.0732 7.28679C20.2694 8.01175 21 9.30887 21 10.7076V17C21 19.2091 19.2091 21 17 21H15M9 21V17C9 15.3431 10.3431 14 12 14V14C13.6569 14 15 15.3431 15 17V21M9 21H15" stroke="#ddf2ff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-5"></path></svg>',
+        label: "Home",
+        path: "/"
+    }, {
+        icon: '<svg viewBox="0 0 24 24" class="nav w-7 h-7" stroke-width="0.9" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff"><path d="M6.81815 22L6.81819 19.143C6.66235 17.592 5.63284 16.4165 4.68213 15M14.4545 22L14.4545 20.2858C19.3636 20.2858 18.8182 14.5717 18.8182 14.5717C18.8182 14.5717 21 14.5717 21 12.286L18.8182 8.8576C18.8182 4.28632 15.1094 2.04169 11.1818 2.00068C8.98139 1.97771 7.22477 2.53124 5.91201 3.5" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-10"></path><path d="M13 7L15 9.5L13 12" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-20"></path><path d="M5 7L3 9.5L5 12" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-30"></path><path d="M10 6L8 13" stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="svg-elem-40"></path></svg>',
+        label: "Work",
+        path: "/software-engineer"
+    }, {
+        icon: '<svg class="nav w-7 h-7" stroke-width="0.9" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff" width="24" height="24"><path d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z" stroke="#ffffff" stroke-width="0.9" stroke-linejoin="round" class="svg-elem-12"></path></svg>',
+        label: "Interests",
+        path: "/interests"
+    }
+]}>
+    <BlogSubLayout>
+                <div>
+                    <h1 class="text-regal-blue-50 text-2xl pb-5 font-medium">Posts</h1>
+                    <ul class="space-y-4">
+                        {blogEntries.map(blogPostEntry => (
+                                <li key={blogPostEntry.data.title} class="text-regal-blue-50">
+                                    <a class="text-regal-blue-50 text-md font-semibold"
+                                       href={`/blog/${blogPostEntry.slug}`}>{blogPostEntry.data.title} <span
+                                            class="text-xs font-medium">- {blogPostEntry.data.description}
+                                        | Published {blogPostEntry.data.pubDate.toLocaleDateString("Eastern")}
+                                        ~ Tags: [{blogPostEntry.data.tags.map(t => t.toLowerCase()).join(", ")}]</span></a>
+                                </li>
+                        ))}
+                    </ul>
+                </div>
+    </BlogSubLayout>
+</BlogLayout>

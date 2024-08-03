@@ -1,0 +1,28 @@
+{
+  "name": "personalwebsite",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "build-se": "bun --filter='software-eng' run build",
+    "serve-se": "bun --filter='software-eng' run serve",
+    "build-i": "bun --filter='interests' run build",
+    "serve-i": "bun --filter='interests' run serve",
+    "dev-h": "concurrently \"bun run prev-deps\" \"bun --filter='host' run start\"",
+    "build": "concurrently \"bun --filter='software-eng' run regBuild\" \"bun --filter='interests' run regBuild\" && bun --filter='host' run build",
+    "prev-deps": "concurrently \"bun run build-se\" \"bun run serve-se\" \"bun run build-i\" \"bun run serve-i\" --names \"software-eng,software-eng,interests,interests\" --prefix \"[{name}]\" --prefix-colors blue,blue,green,green"
+
+  },
+  "peerDependencies": {},
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "core-js"
+  ],
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

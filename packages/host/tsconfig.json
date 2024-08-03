@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": ["src", "./*.d.ts", "./*.config.ts"],
+  "exclude": ["**/dist"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/qwik/*"]
+    },
+
+    "jsx": "react-jsx",
+    "jsxImportSource": "@builder.io/qwik"
+  }
+}
