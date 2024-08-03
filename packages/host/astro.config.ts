@@ -42,8 +42,8 @@ export default defineConfig({
       hooks: {
         'astro:build:setup': ({ vite, target }) => {
           if (target === 'client') {
-            if (vite.build && vite.build.rollupOptions) {
-              vite.build.rollupOptions['external'] = [
+            if (vite.build?.rollupOptions) {
+              vite.build.rollupOptions.external = [
                 'software-eng',
                 'interests',
                 'solid-js',
