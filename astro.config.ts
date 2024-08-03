@@ -2,8 +2,6 @@ import qwik from '@qwikdev/astro'
 import { defineConfig } from 'astro/config'
 // import node from "@astrojs/node";
 import tailwind from '@astrojs/tailwind'
-import svelte from '@astrojs/svelte'
-import solidJs from '@astrojs/solid-js'
 import compressor from 'astro-compressor'
 import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
@@ -31,12 +29,6 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    svelte({
-      include: '**/svelte/*',
-    }),
-    solidJs({
-      include: '**/solid/*',
-    }),
     {
       name: 'importmap-externals',
       hooks: {
@@ -44,9 +36,6 @@ export default defineConfig({
           if (target === 'client') {
             if (vite.build?.rollupOptions) {
               vite.build.rollupOptions.external = [
-                'software-eng',
-                'interests',
-                'solid-js',
               ]
             }
           }
